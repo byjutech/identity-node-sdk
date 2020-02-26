@@ -1,5 +1,11 @@
-# identity-node-sdk
+## identity-node-sdk <!-- omit in toc -->
 Node.js client library for using Identity service.
+
+- [Getting started](#getting-started)
+  - [Installation](#installation)
+- [Examples](#examples)
+  - [Find identity](#find-identity)
+  - [Create identity](#create-identity)
 
 ## Getting started
 
