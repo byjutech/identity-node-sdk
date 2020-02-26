@@ -1,13 +1,18 @@
 {
   "name": "identity-node-sdk",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js client library for using Identity service",
   "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/byjutech/identity-node-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/byjutech/identity-node-sdk/issues"
+  },
   "dependencies": {
     "@hapi/wreck": "^17.0.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.5",
-    "request-promise-native": "^1.0.8",
     "simple-oauth2": "^3.3.0"
   },
   "devDependencies": {
@@ -19,7 +24,5 @@
   },
   "scripts": {
     "test": "jest"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
