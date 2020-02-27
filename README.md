@@ -6,6 +6,7 @@ Node.js client library for using Identity service.
 - [Examples](#examples)
   - [Find identity](#find-identity)
   - [Create identity](#create-identity)
+  - [Add account to identity](#add-account-to-identity)
 
 ## Getting started
 
@@ -61,6 +62,18 @@ const request = {
       last_name: "Wayne"
     }
   ]
+}
+
+const createRes = await service.create(request)
+```
+
+### Add account to identity
+
+```js
+const service = identity(idOpts)
+const request = {
+  first_name: "Jason",
+  last_name: "Todd"
 }
 
 const createRes = await service.create(request)

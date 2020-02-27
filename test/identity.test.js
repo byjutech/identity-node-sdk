@@ -22,20 +22,13 @@ const idOpts = {
   // scope: 'openid offline clients.authorize identities.read identities.create accounts.create profiles.create'
 }
 
+const phone = faker.phone.phoneNumberFormat()
+
 describe('identities', () => {
-  test('find with phone', async () => {
-    const service = identity(idOpts)
-    const query = "xxxxxxxxxx"
-
-    const searchRes = await service.find(query)
-
-    expect(searchRes.phone).toBe(query)
-  })
-
   test('create new', async () => {
     const service = identity(idOpts)
     const request = {
-      phone: faker.phone.phoneNumberFormat(),
+      phone: phone,
       accounts: [
         {
           first_name: faker.name.firstName(),
@@ -48,6 +41,15 @@ describe('identities', () => {
 
     expect(createRes.phone).toBe(request.phone)
     expect(createRes.accounts).toHaveLength(request.accounts.length)
+  })
+
+  test('find with phone', async () => {
+    const service = identity(idOpts)
+    const query = phone
+
+    const searchRes = await service.find(query)
+
+    expect(searchRes.phone).toBe(query)
   })
 
   test('disallow create with wrong scopes', async () => {
@@ -68,5 +70,24 @@ describe('identities', () => {
     }
 
     expect(service.create(request)).resolves.not.toThrow()
+  })
+})
+
+describe('accounts', () => {
+  test('add to identity', async () => {
+    const service = identity({...idOpts, scope: 'identities.read accounts.create'})
+
+    const query = phone
+    const searchRes = await service.find(query)
+    let accountLength = searchRes.accounts.length
+
+    const request = {
+      first_name: faker.name.firstName(),
+      last_name: faker.name.firstName()
+    }
+
+    const createRes = await service.addAccount(searchRes.id, request)
+
+    expect(createRes.accounts).toHaveLength(accountLength + 1)
   })
 })

@@ -39,6 +39,19 @@ class Identity {
     return payload
   }
 
+  async addAccount(identityId, body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identityId}/accounts`)
+    
+    const token = await this.accessToken()
+    const {payload} = await request.post(reqUrl.href, {
+      json: true,
+      headers: { 'Authorization': `Bearer ${token.access_token}`},
+      payload: body
+    })
+
+    return payload
+  }
+
   async accessToken() {
     if (this.token == null) {
       const result = await this.oauth2.clientCredentials.getToken(this.tokenConfig)
