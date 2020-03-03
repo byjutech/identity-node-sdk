@@ -5,6 +5,7 @@ Node.js client library for using Identity service.
   - [Installation](#installation)
 - [Examples](#examples)
   - [Find identity](#find-identity)
+  - [Get identity](#get-identity)
   - [Create identity](#create-identity)
   - [Add account to identity](#add-account-to-identity)
 
@@ -48,6 +49,15 @@ const service = identity(idOpts)
 const query = "+xx-xxxxxxxxxx"
 
 const result = await service.find(query)
+```
+
+### Get identity
+
+```js
+const service = identity(idOpts)
+const identityId = "xxxx-xxxxxxxxxx-xxxxxxx-xxxx"
+
+const result = await service.get(query)
 ```
 
 ### Create identity
