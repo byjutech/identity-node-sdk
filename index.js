@@ -26,6 +26,18 @@ class Identity {
     return payload
   }
 
+  async get(id) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${id}`)
+
+    const token = await this.accessToken()
+    const {payload} = await request.get(reqUrl.href, {
+      json: true,
+      headers: { 'Authorization': `Bearer ${token.access_token}`}
+    })
+
+    return payload
+  }
+
   async create(body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities`)
     

@@ -5,8 +5,8 @@ const idOpts = {
   serviceBaseUrl: 'http://localhost:9020',
   oauth2: {
     client: {
-      id: '66cffe24-adf8-4fd5-b852-4a1b1885fac7',
-      secret: 'D0rM-D_Rb94PD.bMpHVJq-KuSZ'
+      id: '5f1e61de-fc0a-4f80-af90-b0688534a6f6',
+      secret: '_CpahQgipnVULdfh~OZ1-aQT-p'
     },
     auth: {
       tokenHost: 'https://localhost:9000',
@@ -18,7 +18,7 @@ const idOpts = {
       rejectUnauthorized: false
     }
   },
-  scope: 'openid offline identities.read identities.create'
+  scope: 'openid offline identities.find identities.create'
   // scope: 'openid offline clients.authorize identities.read identities.create accounts.create profiles.create'
 }
 
@@ -52,6 +52,17 @@ describe('identities', () => {
     expect(searchRes.phone).toBe(query)
   })
 
+  test('get by id', async () => {
+    const service = identity({...idOpts, scope: 'identities.find identities.read'})
+    const query = phone
+
+    const searchRes = await service.find(query)
+
+    const getRes = await service.get(searchRes.id)
+
+    expect(getRes.phone).toBe(query)
+  })
+
   test('disallow create with wrong scopes', async () => {
     expect.assertions(1)
 
@@ -75,7 +86,7 @@ describe('identities', () => {
 
 describe('accounts', () => {
   test('add to identity', async () => {
-    const service = identity({...idOpts, scope: 'identities.read accounts.create'})
+    const service = identity({...idOpts, scope: 'identities.find accounts.create'})
 
     const query = phone
     const searchRes = await service.find(query)
