@@ -29,6 +29,7 @@
     "remove-dist": "rimraf ./dist",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "build": "babel src --presets=@babel/preset-env --out-dir dist",
-    "prebuild": "npm run clean-dist"
+    "prebuild": "npm run clean-dist",
+    "preinstall": "npm run build"
   }
 }
