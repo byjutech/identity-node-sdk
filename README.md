@@ -86,5 +86,5 @@ const request = {
   last_name: "Todd"
 }
 
-const createRes = await service.create(request)
+const createRes = await service.accounts.add(identity_id, request)
 ```
