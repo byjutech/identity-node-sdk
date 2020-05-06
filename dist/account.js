@@ -42,7 +42,7 @@ class Account {
 
   async add(identityId, body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identityId}/accounts`);
-    const token = await this.accessToken();
+    const token = await this.token;
     const {
       payload
     } = await _wreck.default.post(reqUrl.href, {

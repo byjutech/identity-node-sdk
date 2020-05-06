@@ -31,7 +31,7 @@ class Account {
   async add(identityId, body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identityId}/accounts`)
     
-    const token = await this.accessToken()
+    const token = await this.token
     const {payload} = await request.post(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
