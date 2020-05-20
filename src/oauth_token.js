@@ -16,7 +16,7 @@ export class OAuthToken {
     if (this._token == null) {
       const result = await this.oauth2.clientCredentials.getToken(this.tokenConfig)
       this._token = this.oauth2.accessToken.create(result)
-    } else if (this._token != null && this.token.expired()) {
+    } else if (this._token != null && this._token.expired()) {
       this._token = await this._token.refresh(this.tokenConfig)
     }
     
