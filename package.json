@@ -1,5 +1,5 @@
 {
-  "name": "@byjutech/identity-node-sdk",
+  "name": "@byjutech/identity-js",
   "version": "1.0.0",
   "description": "Node.js client library for using Identity service",
   "main": "dist/index.js",

@@ -1,4 +1,5 @@
-## identity-node-sdk <!-- omit in toc -->
+# identity-node-sdk <!-- omit in toc -->
+
 Node.js client library for using Identity service.
 
 - [Getting started](#getting-started)
@@ -8,20 +9,30 @@ Node.js client library for using Identity service.
   - [Get identity](#get-identity)
   - [Create identity](#create-identity)
   - [Add account to identity](#add-account-to-identity)
+  - [Get account details](#get-account-details)
 
 ## Getting started
 
 ### Installation
-This library is **not** distributed on `npm`. In order to add it as a dependency, run the following command:
+
+This library is **not** distributed on `npm` registry. It is available on github packages published [here](https://github.com/orgs/byjutech/packages?repo_name=identity-node-sdk) In order to add it as a dependency,
+
+Add `.npmrc` in the root of your project
+
+```txt
+@byjutech:registry=https://npm.pkg.github.com
+```
+
+Then run the following command:
 
 ```sh
-$ npm install git+ssh://git@github.com/byjutech/identity-node-sdk.git
+npm install @byjutech/identity-js --save
 ```
 
 ## Examples
 
 ```js
-import { identity } from 'identity-node-sdk'
+import { identity } from '@byjutech/identity-js'
 
 const idOpts = {
   serviceBaseUrl: 'https://identity-staging.tllms.com',
@@ -38,7 +49,7 @@ const idOpts = {
     },
     // http: { } // wreck options
   },
-  scope: 'openid offline identities.read identities.create accounts.create'
+  scope: 'openid offline identities.read identities.create accounts.read accounts.create'
 }
 ```
 
@@ -87,4 +98,12 @@ const request = {
 }
 
 const createRes = await service.accounts.add(identity_id, request)
+```
+
+### Get account details
+
+```js
+const service = identity(idOpts)
+
+const createRes = await service.accounts.get(account_id)
 ```
