@@ -1,9 +1,8 @@
 {
-  "name": "identity-node-sdk",
+  "name": "@byjutech/identity-node-sdk",
   "version": "1.0.0",
   "description": "Node.js client library for using Identity service",
   "main": "dist/index.js",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/byjutech/identity-node-sdk.git"
@@ -17,7 +16,7 @@
     "simple-oauth2": "^3.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
+    "@babel/cli": "^7.13.0",
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-export-default-from": "^7.8.3",
@@ -33,5 +32,8 @@
     "clean-dist": "npm run remove-dist && mkdir dist",
     "build": "babel src --config-file='./babel.config.js' --out-dir dist",
     "prebuild": "npm run clean-dist"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

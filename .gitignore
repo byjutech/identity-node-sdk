@@ -103,6 +103,7 @@ typings/
 # Temporary folders
 tmp/
 temp/
+.DS_Store
 
 ### Vim ###
 # Swap
