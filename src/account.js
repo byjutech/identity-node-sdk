@@ -1,5 +1,5 @@
 import request from '@hapi/wreck'
-import {OAuthToken} from './oauth_token'
+import { OAuthToken } from './oauth_token'
 
 class Account {
   constructor(options) {
@@ -17,10 +17,10 @@ class Account {
   }
 
   async get(id) {
-    const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}`)
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}?identity_info=true`)
 
     const token = await this.token
-    const {payload} = await request.get(reqUrl.href, {
+    const { payload } = await request.get(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
     })
@@ -30,9 +30,9 @@ class Account {
 
   async add(identityId, body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identityId}/accounts`)
-    
+
     const token = await this.token
-    const {payload} = await request.post(reqUrl.href, {
+    const { payload } = await request.post(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
       payload: body
