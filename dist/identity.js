@@ -9,6 +9,8 @@ var _wreck = _interopRequireDefault(require("@hapi/wreck"));
 
 var _account = _interopRequireDefault(require("./account"));
 
+var _premium_account = _interopRequireDefault(require("./premium_account"));
+
 var _oauth_token = require("./oauth_token");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -18,6 +20,7 @@ class Identity {
     this.tokenProvider = new _oauth_token.OAuthToken(options);
     this.serviceBaseUrl = this.tokenProvider.baseUrl;
     this.accounts = new _account.default(this.tokenProvider);
+    this.premiumAccounts = new _premium_account.default(this.tokenProvider);
   }
 
   get token() {

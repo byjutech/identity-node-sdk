@@ -27,7 +27,7 @@ class Account {
   }
 
   async get(id) {
-    const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}`);
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}?identity_info=true`);
     const token = await this.token;
     const {
       payload
@@ -46,6 +46,21 @@ class Account {
     const {
       payload
     } = await _wreck.default.post(reqUrl.href, {
+      json: true,
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`
+      },
+      payload: body
+    });
+    return payload;
+  }
+
+  async patch(id, body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}`);
+    const token = await this.token;
+    const {
+      payload
+    } = await _wreck.default.patch(reqUrl.href, {
       json: true,
       headers: {
         'Authorization': `Bearer ${token.access_token}`
