@@ -49,7 +49,7 @@ const idOpts = {
     },
     // http: { } // wreck options
   },
-  scope: 'openid offline identities.read identities.create accounts.read accounts.create'
+  scope: 'openid offline identities.read identities.create accounts.read accounts.create accounts.patch premiumaccounts.read'
 }
 ```
 
@@ -94,7 +94,8 @@ const createRes = await service.create(request)
 const service = identity(idOpts)
 const request = {
   first_name: "Jason",
-  last_name: "Todd"
+  last_name: "Todd",
+  premium_account_id: "acc_123"
 }
 
 const createRes = await service.accounts.add(identity_id, request)
@@ -106,4 +107,26 @@ const createRes = await service.accounts.add(identity_id, request)
 const service = identity(idOpts)
 
 const createRes = await service.accounts.get(account_id)
+```
+
+### Update account details as a patch request
+
+```js
+const service = identity(idOpts)
+const request = {
+  current_grade: "8",
+  first_name: "Jason",
+  last_name: "Todd",
+  nickname: "Todd",
+  premium_account_id: "acc_123"
+}
+const createRes = await service.accounts.patch(account_id, request)
+```
+
+### Get premium account details
+
+```js
+const service = identity(idOpts)
+
+const createRes = await service.premiumAccounts.get(premium_account_id)
 ```

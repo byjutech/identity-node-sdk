@@ -19,7 +19,7 @@ import faker from 'faker'
 //     }
 //   },
 //   scope: 'openid offline identities.find identities.create'
-//   // scope: 'openid offline clients.authorize identities.find identities.read identities.create accounts.create profiles.create'
+//   // scope: 'openid offline clients.authorize identities.find identities.read identities.create accounts.create profiles.create accounts.patch premiumaccounts.read'
 // }
 
 const idOpts = {
@@ -37,7 +37,7 @@ const idOpts = {
           },
           // http: { } // wreck options
         },
-        scope: 'openid offline identities.find identities.read identities.create accounts.create'
+        scope: 'openid offline identities.find identities.read identities.create accounts.create accounts.patch premiumaccounts.read'
       }
 
 const phone = faker.phone.phoneNumberFormat()
