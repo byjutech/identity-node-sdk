@@ -1,6 +1,6 @@
 import request from '@hapi/wreck'
 import Account from './account'
-import PremimumAccount from './premium_account'
+import PremiumAccount from './premium_account'
 import {OAuthToken} from './oauth_token';
 
 class Identity {
@@ -9,7 +9,7 @@ class Identity {
     this.serviceBaseUrl = this.tokenProvider.baseUrl
 
     this.accounts = new Account(this.tokenProvider)
-    this.premiumAccounts = new PremimumAccount(this.tokenProvider)
+    this.premiumAccounts = new PremiumAccount(this.tokenProvider)
   }
 
   get token() {
