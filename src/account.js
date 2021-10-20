@@ -54,6 +54,17 @@ class Account {
     return payload
   }
 
+  async move(id,body){
+      const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}`);
+      const token = await this.token;
+      const { payload } = await request.put(reqUrl.href, {
+          json: true,
+          headers: { Authorization: `Bearer ${token.access_token}` },
+          payload: body,
+      });
+      return payload;
+  }
+  
 }
 
 export default Account
