@@ -55,7 +55,7 @@ class Account {
   }
 
   async move(id,body){
-      const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}`);
+      const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}/move`);
       const token = await this.token;
       const { payload } = await request.put(reqUrl.href, {
           json: true,
@@ -64,7 +64,7 @@ class Account {
       });
       return payload;
   }
-  
+
 }
 
 export default Account

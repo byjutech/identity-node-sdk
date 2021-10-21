@@ -65,7 +65,7 @@ class Account {
     }
 
     async move(id, body) {
-        const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}`);
+        const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}/move`);
         const token = await this.token;
         const { payload } = await _wreck.default.put(reqUrl.href, {
             json: true,
