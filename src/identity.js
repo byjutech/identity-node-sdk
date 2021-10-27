@@ -2,6 +2,7 @@ import request from '@hapi/wreck'
 import Account from './account'
 import PremiumAccount from './premium_account'
 import {OAuthToken} from './oauth_token';
+import Auth from './auth'
 
 class Identity {
   constructor(options) {
@@ -10,6 +11,7 @@ class Identity {
 
     this.accounts = new Account(this.tokenProvider)
     this.premiumAccounts = new PremiumAccount(this.tokenProvider)
+    this.auth = new Auth(this.tokenProvider)
   }
 
   get token() {
@@ -43,7 +45,7 @@ class Identity {
 
   async create(body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities`)
-    
+
     const token = await this.token
     const {payload} = await request.post(reqUrl.href, {
       json: true,
@@ -59,6 +61,19 @@ class Identity {
 
     const token = await this.token
     const {payload} = await request.put(reqUrl.href, {
+      json: true,
+      headers: { 'Authorization': `Bearer ${token.access_token}` },
+      payload: body
+    })
+
+    return payload
+  }
+
+  async patch(id, body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${id}`)
+
+    const token = await this.token
+    const {payload} = await request.patch(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
       payload: body
