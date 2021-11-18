@@ -76,6 +76,19 @@ class Account {
         });
         return payload;
     }
+
+    async attach(id, body) {
+        const reqUrl = new URL(`${this.serviceBaseUrl}/api/accounts/${id}/profiles`);
+        const token = await this.token;
+        const { payload } = await _wreck.default.post(reqUrl.href, {
+            json: true,
+            headers: {
+                Authorization: `Bearer ${token.access_token}`,
+            },
+            payload: body,
+        });
+        return payload;
+    }
 }
 
 var _default = Account;
