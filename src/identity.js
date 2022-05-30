@@ -81,6 +81,21 @@ class Identity {
 
     return payload
   }
+
+  async patchPtoF(body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/resource`);
+    const token = await this.token;
+    const {
+      payload
+    } = await _wreck.default.patch(reqUrl.href, {
+      json: true,
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`
+      },
+      payload: body
+    });
+    return payload;
+  }
 }
 
 export default Identity
