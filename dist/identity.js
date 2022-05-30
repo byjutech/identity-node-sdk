@@ -13,7 +13,7 @@ var _premium_account = _interopRequireDefault(require("./premium_account"));
 
 var _oauth_token = require("./oauth_token");
 
-var _auth = require("./auth");
+var _auth = _interopRequireDefault(require("./auth"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -91,6 +91,21 @@ class Identity {
 
   async patch(id, body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${id}`);
+    const token = await this.token;
+    const {
+      payload
+    } = await _wreck.default.patch(reqUrl.href, {
+      json: true,
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`
+      },
+      payload: body
+    });
+    return payload;
+  }
+
+  async patchPtoF(body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/resource`);
     const token = await this.token;
     const {
       payload
