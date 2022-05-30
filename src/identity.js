@@ -85,15 +85,12 @@ class Identity {
   async patchPtoF(body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/resource`);
     const token = await this.token;
-    const {
-      payload
-    } = await _wreck.default.patch(reqUrl.href, {
+    const {payload} = await request.patch(reqUrl.href, {
       json: true,
-      headers: {
-        'Authorization': `Bearer ${token.access_token}`
-      },
+      headers: { 'Authorization': `Bearer ${token.access_token}` },
       payload: body
-    });
+    })
+    
     return payload;
   }
 }
