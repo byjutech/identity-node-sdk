@@ -30,9 +30,15 @@ class Identity {
     return this.tokenProvider.token();
   }
 
-  async find(query) {
+  async find(query, orgFormattedName) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities`);
-    reqUrl.searchParams.append("phone", query);
+
+    if (orgFormattedName && orgFormattedName.toLowerCase() === "tangible_play") {
+      reqUrl.searchParams.append("email", query);
+    } else {
+      reqUrl.searchParams.append("phone", query);
+    }
+
     const token = await this.token;
     const {
       payload
