@@ -1,6 +1,6 @@
 {
   "name": "@byjutech/identity-js",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "description": "Node.js client library for using Identity service",
   "main": "dist/index.js",
   "repository": {

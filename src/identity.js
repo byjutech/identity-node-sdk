@@ -1,7 +1,7 @@
 import request from '@hapi/wreck'
 import Account from './account'
 import PremiumAccount from './premium_account'
-import {OAuthToken} from './oauth_token';
+import { OAuthToken } from './oauth_token';
 import Auth from './auth'
 
 class Identity {
@@ -20,14 +20,14 @@ class Identity {
 
   async find(query, orgFormattedName) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities`)
-    if (orgFormattedName && orgFormattedName.toLowerCase() === "tangible_play"){
+    if (orgFormattedName && orgFormattedName.toLowerCase() === "tangible_play") {
       reqUrl.searchParams.append("email", query)
-    }else{
+    } else {
       reqUrl.searchParams.append("phone", query)
     }
 
     const token = await this.token
-    const {payload} = await request.get(reqUrl.href, {
+    const { payload } = await request.get(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
     })
@@ -39,7 +39,7 @@ class Identity {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${id}`)
 
     const token = await this.token
-    const {payload} = await request.get(reqUrl.href, {
+    const { payload } = await request.get(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
     })
@@ -51,7 +51,7 @@ class Identity {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities`)
 
     const token = await this.token
-    const {payload} = await request.post(reqUrl.href, {
+    const { payload } = await request.post(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
       payload: body
@@ -64,7 +64,7 @@ class Identity {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${id}`)
 
     const token = await this.token
-    const {payload} = await request.put(reqUrl.href, {
+    const { payload } = await request.put(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
       payload: body
@@ -77,7 +77,7 @@ class Identity {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${id}`)
 
     const token = await this.token
-    const {payload} = await request.patch(reqUrl.href, {
+    const { payload } = await request.patch(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
       payload: body
@@ -89,12 +89,36 @@ class Identity {
   async patchPtoF(body) {
     const reqUrl = new URL(`${this.serviceBaseUrl}/api/resource`);
     const token = await this.token;
-    const {payload} = await request.patch(reqUrl.href, {
+    const { payload } = await request.patch(reqUrl.href, {
       json: true,
       headers: { 'Authorization': `Bearer ${token.access_token}` },
       payload: body
     })
-    
+
+    return payload;
+  }
+
+  async initiateLink(identity_id, body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identity_id}/link/initiate`);
+    const token = await this.token;
+    const { payload } = await request.post(reqUrl.href, {
+      json: true,
+      headers: { 'Authorization': `Bearer ${token.access_token}` },
+      payload: body
+    })
+
+    return payload;
+  }
+
+  async verifyLink(identity_id, body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identity_id}/link/verify`);
+    const token = await this.token;
+    const { payload } = await request.post(reqUrl.href, {
+      json: true,
+      headers: { 'Authorization': `Bearer ${token.access_token}` },
+      payload: body
+    })
+
     return payload;
   }
 }

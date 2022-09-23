@@ -125,6 +125,36 @@ class Identity {
     return payload;
   }
 
+  async initiateLink(identity_id, body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identity_id}/link/initiate`);
+    const token = await this.token;
+    const {
+      payload
+    } = await _wreck.default.post(reqUrl.href, {
+      json: true,
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`
+      },
+      payload: body
+    });
+    return payload;
+  }
+
+  async verifyLink(identity_id, body) {
+    const reqUrl = new URL(`${this.serviceBaseUrl}/api/identities/${identity_id}/link/verify`);
+    const token = await this.token;
+    const {
+      payload
+    } = await _wreck.default.post(reqUrl.href, {
+      json: true,
+      headers: {
+        'Authorization': `Bearer ${token.access_token}`
+      },
+      payload: body
+    });
+    return payload;
+  }
+
 }
 
 var _default = Identity;
